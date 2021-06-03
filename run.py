@@ -1,19 +1,27 @@
 import turtle
+
 MINIMUM_BRANCH_LENGTH = 5
+
 def build_tree(t, branch_length, shorten_by, angle):
   if branch_length > MINIMUM_BRANCH_LENGTH:
+    new_length = branch_length / 2
+
+    t.left(angle)
     t.forward(branch_length)
-    new_length = branch_length - shorten_by
-    t.left(angle)
     build_tree(t, new_length, shorten_by, angle)
-    t.right(angle * 2)
-    build_tree(t, new_length, shorten_by, angle)
+
     t.left(angle)
-    t.backward(branch_length)
+    t.forward(branch_length)
+    build_tree(t, new_length, shorten_by, angle)
+
+    t.left(angle)
+    t.forward(branch_length)
+    build_tree(t, new_length, shorten_by, angle)
+
 tree = turtle.Turtle()
-tree.speed(10)
+tree.speed(0)
 tree.hideturtle()
-tree.setheading(90)
+tree.setheading(0)
 tree.color('green')
-build_tree(tree, 50, 5, 30)
+build_tree(tree, 100, 20, 120)
 turtle.mainloop()
